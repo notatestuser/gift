@@ -4,38 +4,16 @@ git      = require '../src'
 Status   = require '../src/status'
 
 GIT_STATUS = """
-    # On branch master
-    # Changes to be committed:
-    #   (use "git reset HEAD <file>..." to unstage)
-    #
-    #       deleted:    crackers.txt
-    #       modified:   file.txt
-    #
-    # Changed but not updated:
-    #   (use "git add <file>..." to update what will be committed)
-    #   (use "git checkout -- <file>..." to discard changes in working directory)
-    #
-    #       modified:   cheese.txt
-    #
-    # Untracked files:
-    #   (use "git add <file>..." to include in what will be committed)
-    #
-    #       pickles.txt
+     M cheese.txt
+    D  crackers.txt
+    M  file.txt
+    ?? pickles.txt
   """
-GIT_STATUS_CLEAN = """
-    # On branch master
-    # nothing to commit (working directory clean)
-  """
+GIT_STATUS_CLEAN = ""
 GIT_STATUS_NOT_CLEAN = """
-    # On branch master
-    # Changes not staged for commit:
-    #   (use "git add ..." to update what will be committed)
-    #   (use "git checkout -- ..." to discard changes in working directory)
-    #
-    #   modified:   lib/index.js
-    #   modified:   npm-shrinkwrap.json
-    #   modified:   package.json
-    #
+    A  lib/index.js
+     M npm-shrinkwrap.json
+     M package.json
   """
 
 describe "Status", ->
