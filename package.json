@@ -12,7 +12,7 @@
 , "main": "./lib/index"
 
 , "scripts":
-  { "test":       "mocha"
+  { "test":       "mocha --compilers coffee:'coffee-script'"
   , "prepublish": "coffee -o lib -c src"
   }
 
@@ -24,8 +24,8 @@
 , "dependencies": {"underscore": "1.x.x"}
 , "devDependencies":
   { "should":        "1.2.x"
-  , "mocha":         "0.x.x"
-  , "coffee-script": "1.1.x"
+  , "mocha":         "1.x.x"
+  , "coffee-script": "1.6.x"
   }
 
 , "engines": {"node": "> 0.4.1"}
