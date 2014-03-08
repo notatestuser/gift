@@ -58,12 +58,19 @@ module.exports = class Tree
   # 
   find: (file, callback) ->
     if /\//.test file
-      [dir, rest] = file.split "/", 2
+      console.log "looking for tree"
+      path_components = file.split "/"
+      dir = path_components[0]
+      rest = path_components.slice(1, path_components.length).join("/")
+      console.log dir, rest
       @trees (err, _trees) =>
+        console.log _trees.map (e) -> e.name
         for tree in _trees
+          console.log tree.name == dir
           return tree.find rest, callback if tree.name == dir
         return callback null, null
     else
+      console.log "looking for blob"
       @contents (err, children) ->
         return callback err if err
         for child in children
