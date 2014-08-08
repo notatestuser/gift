@@ -9,12 +9,21 @@ module.exports = Git = (git_dir, dot_git) ->
     [callback, options] = [options, callback] if !callback
     options ?= {}
     options  = options_to_argv options
-    options  = options.join " "
     args    ?= []
-    args     = args.join " " if args instanceof Array
-    bash     = "#{Git.bin} #{command} #{options} #{args}"
-    exec bash, {cwd: git_dir, encoding:'binary'}, callback
-    return bash
+    args     = args.split " " if typeof args == 'string'
+    args     = [ command ].concat options, args
+
+    stdout   = ''
+    stderr   = ''
+    proc     = spawn Git.bin, args, {cwd: git_dir}
+    proc.stdout.on 'data', ( buffer ) ->
+      stdout += buffer.toString 'binary'
+    proc.stderr.on 'data', ( buffer ) ->
+      stderr += buffer.toString 'binary'
+    proc.on 'error', (err) ->
+      callback err, stdout, stderr
+    proc.on 'exit', () ->
+      callback null, stdout, stderr
 
   # Public: Passthrough for raw git commands
   #
