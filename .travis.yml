@@ -4,7 +4,8 @@ node_js:
   - "0.8"
   - "0.10"
   - "0.11"
-
+git:
+  depth: 1
 install:
   - "npm install -g npm"
   - "npm install"
