@@ -38,7 +38,7 @@ exports.Head = class Head extends Ref
     Ref.find_all repo, "head", Head, callback
 
   @current: (repo, callback) ->
-    fs.readFile "#{repo.dot_git}/HEAD", (err, data) ->
+    fs.readFile "#{repo.dot_git}/HEAD", "utf8", (err, data) ->
       return callback err if err
 
       ref = /ref: refs\/heads\/([^\s]+)/.exec data
@@ -46,7 +46,7 @@ exports.Head = class Head extends Ref
       return callback new Error "Current branch is not a valid branch." if !ref
 
       [m, branch] = ref
-      fs.readFile "#{repo.dot_git}/refs/heads/#{branch}", (err, id) ->
-        Commit.find repo, id, (err, commit) ->
+      fs.readFile "#{repo.dot_git}/refs/heads/#{branch}", "utf8", (err, id) ->
+        Commit.find repo, id.trim(), (err, commit) ->
           return callback err if err
           return callback null, (new Head branch, commit)
