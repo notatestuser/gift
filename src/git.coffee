@@ -22,8 +22,15 @@ module.exports = Git = (git_dir, dot_git) ->
       stderr += buffer.toString 'binary'
     proc.on 'error', (err) ->
       callback err, stdout, stderr
-    proc.on 'exit', () ->
-      callback null, stdout, stderr
+    proc.on 'exit', ( code, signal ) ->
+      # Manually create a error to match previous .exec() functionality,
+      # which carries the stderr as the message
+      if code
+        err = new Error( stderr )
+        err.code = code
+        err.signal = signal
+
+      callback err, stdout, stderr
 
   # Public: Passthrough for raw git commands
   #
