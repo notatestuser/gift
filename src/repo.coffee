@@ -44,10 +44,10 @@ module.exports = class Repo
   #
   identify: (actor, callback) ->
     # git config user.email "you@example.com"
-    @git "config", {}, ["user.email", "\"#{actor.email}\""], (err) =>
+    @git "config", {}, ["user.email", "#{actor.email}"], (err) =>
       return callback err if err
       # git config user.name "Your Name"
-      @git "config", {}, ["user.name", "\"#{actor.name}\""], (err) =>
+      @git "config", {}, ["user.name", "#{actor.name}"], (err) =>
         return callback err if err
         return callback null
 
@@ -382,9 +382,9 @@ module.exports = class Repo
   commit: (message, options, callback) ->
     [options, callback] = [callback, options] if !callback
     options ?= {}
-    options = _.extend options, {m: "\"#{message}\""}
+    options = _.extend options, {m: "#{message}"}
     # add quotes around author
-    options.author = "\"#{options.author}\"" if options.author?
+    options.author = "#{options.author}" if options.author?
     @git "commit", options, callback
 
   # Public: Add files to the index.
