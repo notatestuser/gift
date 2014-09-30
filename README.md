@@ -42,6 +42,15 @@ Clone a repository:
       repo = _repo
       # => #<Repo>
 
+Pull a repository:
+
+    git = require 'gift'
+
+    git.pull "remote", "branch", "path/to/local/pull/repo", (err, _repo) ->
+      repo = _repo
+      # => #<Repo>
+
+
 ## Repo
 ### `Repo#path`
 `String` - The path to the repository.

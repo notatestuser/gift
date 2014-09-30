@@ -55,3 +55,18 @@ describe "git", ->
         done()
     after (done) ->
       exec "rm -rf #{newRepositoryDir}", done
+
+  describe "pull()", ->
+    @timeout 30000
+    repo = null
+    RepositoryDir = "#{__dirname}/fixtures/clone"
+    before (done) ->
+      git.clone "https://github.com/notatestuser/gift.git", RepositoryDir, (err, _repo) ->
+      git.pull '', '', RepositoryDir, (err, _repo) ->
+        repo = _repo
+        done err
+    it "pull a repository", (done) ->
+      repo.should.be.an.instanceof Repo
+      done()
+    after (done) ->
+      exec "rm -rf #{RepositoryDir}", done
