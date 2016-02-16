@@ -365,8 +365,10 @@ module.exports = class Repo
 
 
   # Public: Checkout the treeish.
-  checkout: (treeish, callback) ->
-    @git "checkout", {}, treeish, callback
+  checkout: (treeish, callback, options) ->
+    if !options
+      options = {}      
+    @git "checkout", options, treeish, callback
 
   # Public: Clean the git repo by removing untracked files
   #
