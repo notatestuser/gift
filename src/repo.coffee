@@ -279,13 +279,19 @@ module.exports = class Repo
   # Public: Show information about files in the index and the
   #         working tree.
   #
+  # files    - Array of String paths; or a String path (optional).
   # options  - An Object of command line arguments to pass to
   #            `git ls-files` (optional).
   # callback - Receives `(err,stdout)`.
   #
-  ls_files: (options, callback) ->
+  ls_files: (files, options, callback) ->
     [options, callback] = [callback, options] if !callback
-    @git "ls-files", options
+    [files, callback]   = [callback, files]   if !callback
+    [files, options]    = [options, files]    if typeof files is 'object' and not _.isArray files
+    options ?= {}
+    files ?= ''
+    files = [files] if _.isString files
+    @git "ls-files", options, _.flatten(['--', files])
     , (err, stdout, stderr) =>
       return callback err if err
       return callback null, @parse_lsFiles stdout,options
