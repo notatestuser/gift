@@ -25,7 +25,7 @@ module.exports = Git = (git_dir, dot_git, git_options) ->
   # Public: Passthrough for raw git commands
   #
   git.cmd  = (command, options, args, callback, encoding) ->
-    git command, options, args, encoding, callback
+    git command, options, args, callback, encoding
 
   # Public: stream results of git command
   #
