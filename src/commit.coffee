@@ -16,6 +16,26 @@ module.exports = class Commit
       _.map parents, (parent) =>
         new Commit @repo, parent
 
+    # Public: `git describe <id>`.
+    #
+    # id           - Commit sha-1
+    # refs         - ["all" or "tags"]; default is annotated tags
+    # first_parent - A boolean indicating only the first parent should be followed.
+    # callback     - Receives `(err, description)`.
+    #
+    @describe = (refs, first_parent, callback) =>
+      [first_parent, callback] = [callback, first_parent] if !callback
+      [refs, callback] = [callback, refs] if !callback
+      options = {};
+      options.all = true if refs == "all"
+      options.tags = true if refs == "tags"
+      options.first-parent = true if !!first_parent
+      options.long = true
+
+      @repo.git "describe", options, @id
+      , (err, stdout, stderr) ->
+        return callback err if err
+        return callback null, stdout.trim()
 
   toJSON: ->
     {@id, @author, @authored_date, @committer, @committed_date, @message}

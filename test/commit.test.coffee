@@ -33,3 +33,18 @@ describe "Commit", ->
 
     it "has the parent commit", ->
       parents[0].id.should.eql parent.id
+
+  describe "#describe", ->
+    repo   = fixtures.branched
+    commit = null
+    before (done) ->
+      repo.commits "something", (err, commits) ->
+        commit = commits[0]
+        done err
+
+    it "should be a long description", (done) ->
+      repo.commits "something", (err, commits) ->
+        commit.describe 'all', (err, description) ->
+          # long descriptions have a '-g' in them to separate the sha-1
+          (/-g/.test description).should.eql true
+          done err
