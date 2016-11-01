@@ -71,3 +71,18 @@ describe "git", ->
         done()
     after (done) ->
       exec "rm -rf #{newRepositoryDir}", done
+
+  describe "clone() with depth and branch", ->
+    @timeout 30000
+    repo = null
+    newRepositoryDir = "#{__dirname}/fixtures/clone_depth_branch"
+    before (done) ->
+      git.clone "https://github.com/notatestuser/gift.git", newRepositoryDir, 1, "develop", (err, _repo) ->
+        repo = _repo
+        done err
+    it "clone a repository", (done) ->
+      repo.should.be.an.instanceof Repo
+      repo.branch "develop", (err, head) ->
+        done err
+    after (done) ->
+      exec "rm -rf #{newRepositoryDir}", done
