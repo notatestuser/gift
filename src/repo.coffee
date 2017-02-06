@@ -243,6 +243,16 @@ module.exports = class Repo
     , (err, stdout, stderr) ->
       callback err
 
+  # Public: `git remote set-url <name>`.
+  #
+  # name     - String name of the remote
+  # callback - Receives `(err)`.
+  #
+  remote_set_url: (name, callback) ->
+    @git "remote set-url", {}, name
+    , (err, stdout, stderr) ->
+      callback err
+
   # Public: `git push <name>`.
   #
   # name     - String name of the remote
