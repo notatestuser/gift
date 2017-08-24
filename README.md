@@ -165,7 +165,7 @@ Get a branch.
 Create a new branch with `name`, and call the callback when complete
 with an error, if one occurred.
 
-### `Repo#delete_branch(delete, callback)`
+### `Repo#delete_branch(delete, force, callback)`
 Delete the branch `name`, and call the callback with an error, if one occurred.
 
 ### `Repo#merge(name, [options, ]callback)`
