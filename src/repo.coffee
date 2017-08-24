@@ -361,10 +361,14 @@ module.exports = class Repo
   # Public: Delete the branch with the given name.
   #
   # name     - String name of the branch to delete.
+  # force    - Force delete if true.
   # callback - Receives `(err)`.
   #
-  delete_branch: (name, callback) ->
-    @git "branch", {d: true}, name, (err, stdout, stderr) ->
+  delete_branch: (name, force, callback) ->
+    [force, callback] = [false, force] if !callback
+    opts = {d: true}
+    opts = {D: true} if force
+    @git "branch", opts, name, (err, stdout, stderr) ->
       return callback err
 
   # Public: Get the Branch with the given name.
