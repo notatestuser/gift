@@ -7,6 +7,22 @@ Tested in all stable versions of node.
 
 [![Build Status](https://secure.travis-ci.org/notatestuser/gift.svg?branch=master)](http://travis-ci.org/notatestuser/gift) [![Dependency Status](https://david-dm.org/notatestuser/gift.svg)](https://david-dm.org/notatestuser/gift) [![devDependency Status](https://david-dm.org/notatestuser/gift/dev-status.svg)](https://david-dm.org/notatestuser/gift#info=devDependencies)
 
+# Table of Contents
+
+- [Installation](#installation)
+- [API](#api)
+  - [Repo](#repo)
+  - [Commit](#commit)
+  - [Head](#head)
+  - [Tag](#tag)
+  - [Config](#config)
+  - [Status](#status)
+  - [Actor](#actor)
+  - [Tree](#tree)
+  - [Blob](#blob)
+  - [Submodule](#submodule)
+- [License](#license)
+
 # Installation
 
 This fork is now in the `npm` package repository. Install it like you would any other package:
