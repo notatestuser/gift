@@ -18,7 +18,7 @@ describe "Repo", ->
 
   describe "#add", ->
     repo    = null
-    git_dir = __dirname + "/fixtures/junk_add"
+    git_dir = __dirname + "/fixtures/junk _$add"
     status  = null
     file    = null
 
