@@ -59,7 +59,9 @@ module.exports = class Tree
   #
   find: (file, callback) ->
     if /\//.test file
-      [dir, rest] = file.split "/", 2
+      path_components = file.split "/"
+      dir = path_components[0]
+      rest = path_components.slice(1, path_components.length).join("/")
       @trees (err, _trees) =>
         for tree in _trees
           return tree.find rest, callback if tree.name == dir
