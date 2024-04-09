@@ -118,6 +118,17 @@ describe "Tree", ->
         blob.should.be.an.instanceof Blob
         blob.name.should.eql "hi.txt"
 
+    #describe "find inside nested directory", ->
+    #  blob = null
+    #  before (done) ->
+    #    tree.find "some/nested/nested_file.txt", (err, _blob) ->
+    #      blob = _blob
+    #      done err
+
+    #  it "finds the Blob", ->
+    #    blob.should.be.an.instancedof Blob
+    #    blob.name.should.eql "nested_file.txt"
+
     describe "find a nonexistant file", ->
       subtree = null
       before (done) ->
