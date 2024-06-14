@@ -12,7 +12,10 @@ module.exports = Git = (git_dir, dot_git, git_options) ->
     options  = options_to_argv options
     options  = options.join " "
     args    ?= []
-    args     = args.join " " if args instanceof Array
+    if args instanceof Array
+      shell_args = for arg in args
+        arg.replace(/(["\s'$`\\])/g,'\\$1')
+      args = shell_args.join " "
     encoding ?= 'utf8'
     bash     = "#{git_options.bin || Git.bin} #{command} #{options} #{args}"
     exec bash, {
